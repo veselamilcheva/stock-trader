@@ -7,11 +7,13 @@
         </h3>
       </div>
       <div class="card-body d-flex justify-content-center align-items-center row">
-        <div class="mr-2">
-          <input type="numebr" calss="form-control" placeholder="Quantity" v-model="quantity">
+        <div class="input-holder">
+          <input :class="{'danger': insufficientFunds}" type="text" class="form-control" placeholder="Quantity" v-model="quantity">
         </div>
         <div>
-          <button class="btn btn-success" @click="buyStock" :disabled="quantity <= 0">Buy</button>
+          <button class="btn btn-success" 
+          @click="buyStock" :disabled="insufficientFunds || quantity <= 0 || quantity % 1 !== 0">
+          {{ insufficientFunds ? 'Insufficient Funds' : 'Buy' }}</button>
         </div>
       </div>
     </div>
@@ -43,7 +45,12 @@
       }
     },
     computed: {
-
+      funds() {
+        return this.$store.getters.funds;
+      },
+      insufficientFunds() {
+        return this.quantity * this.stock.price > this.funds; 
+      }
     }
 }
 
@@ -52,6 +59,16 @@
 
 <style scoped lang="scss">
   .app-stock {
-
+    .input-holder {
+      margin: 16px 16px 16px 0;
+    }
+    .danger {
+      border: 2px solid rgb(196, 52, 52);
+     }
+    @media only screen and (max-width: 1070px) {
+      .input-holder {
+        margin: 16px 16px 16px 16px;
+      }
+    }
   }
 </style>

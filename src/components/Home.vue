@@ -1,7 +1,11 @@
 <template lang="html">
 
-  <section class="components-home">
-    <h1>components-home Component</h1>
+  <section class="components-home col-sm-12 mt-4">
+    <h1>Trade or view your portfolio</h1>
+    <h6>You may Save and Load Data</h6>
+    <h6>Click on 'End Day' to begin a 'New Day'</h6>
+    <hr>
+    <p>Your Funds: {{ funds }}</p>
   </section>
 
 </template>
@@ -23,7 +27,9 @@
 
     },
     computed: {
-
+      funds() {
+        return this.$store.getters.funds;
+      }
     }
 }
 

@@ -8,11 +8,15 @@
         </h3>
       </div>
       <div class="card-body d-flex justify-content-center align-items-center row">
-        <div class="mr-2">
-          <input type="numebr" calss="form-control" placeholder="Quantity" v-model="quantity">
+        <div class="input-holder">
+          <input :class="{'danger': insufficientQuantity}" type="text" class="form-control" placeholder="Quantity" v-model="quantity">
         </div>
         <div>
-          <button class="btn btn-success" @click="sellStock" :disabled="quantity <= 0">Sell</button>
+          <button 
+          class="btn btn-success" 
+          @click="sellStock" :disabled="insufficientQuantity || quantity <= 0 || quantity % 1 !== 0">
+          {{ insufficientQuantity ? 'Not enough stocks' : 'Sell' }}
+          </button>
         </div>
       </div>
     </div>
@@ -49,13 +53,25 @@
       }
     },
     computed: {
-
+      insufficientQuantity() {
+        return this.quantity > this.stock.quantity;
+      }
     }
 }
 </script>
 
 <style scoped lang="scss">
   .app-portfolio-stock {
-
+    .input-holder {
+      margin: 16px 16px 16px 0;
+    }
+    .danger {
+      border: 2px solid rgb(196, 52, 52);
+    }
+    @media only screen and (max-width: 1070px) {
+      .input-holder {
+        margin: 16px 16px 16px 16px;
+      }
+    }
   }
 </style>
