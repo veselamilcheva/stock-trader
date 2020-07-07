@@ -10,6 +10,17 @@ module.exports = {
   },
   module: {
     rules: [
+        {
+          test: /\.ttf$/,
+          use: [
+            {
+              loader: 'ttf-loader',
+              options: {
+                name: './font/[hash].[ext]',
+              },
+            },
+          ]
+      },
       {
         test: /\.css$/,
         use: [
@@ -61,7 +72,7 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(png|jpg|gif|svg|woff|woff2|eot)$/,
         loader: 'file-loader',
         options: {
           name: '[name].[ext]?[hash]'

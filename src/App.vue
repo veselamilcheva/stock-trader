@@ -20,6 +20,9 @@ export default {
   },
   components: {
     appHeader: Header
+  },
+  created() { //like onInit
+    this.$store.dispatch('initStocks'); //dispatch the action
   }
 };
 </script>
