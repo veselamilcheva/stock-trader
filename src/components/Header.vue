@@ -43,7 +43,6 @@
        this.randomizeStocks();
       },
       getData() {
-        console.log('init');
         this.fetchData();
       },
       saveData () {
