@@ -1,6 +1,7 @@
 # stock-trader
 
 > A Vue.js project
+[vesela-stock-trader](http://vesela-stock-trading.com.s3-website.us-east-2.amazonaws.com/)
 
 ## Build Setup
 
