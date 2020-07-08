@@ -11,19 +11,9 @@
           <router-link class="nav-item" tag="li" to="/" activeClass="active"><a class="nav-link">Home</a></router-link>
           <router-link class="nav-item" tag="li" to="/portfolio" activeClass="active"><a class="nav-link">Portfolio</a></router-link>
           <router-link class="nav-item" tag="li" to="/stocks" activeClass="active"><a class="nav-link">Stocks</a></router-link>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
         </ul>
         <button type="button" @click="endDay" class="btn btn-info mr-2">End Day</button>
+        <button type="button" @click="saveData" class="btn btn-primary mr-2">Save</button>
         <strong class="navbar-text navbar-right">Funds: {{ funds | currency }}</strong>
       </div>
     </nav>
@@ -42,16 +32,31 @@
     },
     data () {
       return {
-
       }
     },
     methods: {
-      ...mapActions([
-        'randomizeStocks'
-      ]),
+      ...mapActions({
+        randomizeStocks: 'randomizeStocks',
+        fetchData: 'loadData'
+      }),
       endDay() {
        this.randomizeStocks();
-      }
+      },
+      getData() {
+        console.log('init');
+        this.fetchData();
+      },
+      saveData () {
+        const data = {
+              funds: this.$store.getters.funds,
+              stockPortfolio: this.$store.getters.stockPortfolio,
+              stocks: this.$store.getters.stocks
+            };
+            this.$http.put('data.json', data);
+      },
+    },
+    created() {
+        this.fetchData();
     },
     computed: {
       funds() {

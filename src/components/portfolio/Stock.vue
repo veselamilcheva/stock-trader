@@ -54,7 +54,7 @@
     },
     computed: {
       insufficientQuantity() {
-        return this.quantity > this.stock.quantity;
+        return parseInt(this.quantity) > this.stock.quantity;
       }
     }
 }

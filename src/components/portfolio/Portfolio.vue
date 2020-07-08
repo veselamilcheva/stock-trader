@@ -1,6 +1,6 @@
 <template lang="html">
 
-  <section class="app-portfolio">
+  <section class="app-portfolio col-md-12 row">
     <app-portfolio-stock v-for="stock in stocks" :stock="stock"></app-portfolio-stock>
   </section>
 
@@ -12,7 +12,7 @@
 
   export default  {
     name: 'app-portfolio',
-    props: ['stock'],
+    props: [],
     mounted () {
 
     },
